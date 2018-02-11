@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+var morgan = require('morgan')
 
+app.use(morgan('tiny'))
 app.use(bodyParser.json())
 
 let persons = [
@@ -37,6 +39,7 @@ app.get('/info', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
+
     res.json(persons)
 })
 
