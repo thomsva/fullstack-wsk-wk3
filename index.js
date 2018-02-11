@@ -53,7 +53,7 @@ app.get('/api/persons/:id', (request, response) => {
 
 app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
-    persons=persons.filter(person => person.id !== id)
+    persons=persons.filter(p => p.id !== id)
     response.status(204).end()
 })
 
@@ -61,8 +61,17 @@ app.post('/api/persons', (request, response) => {
     const person = request.body
     person.id=Math.floor(1000000*Math.random())
     console.log(person)
-    persons=persons.concat(person)
-    response.json(person)
+    if (person.name && person.number) {
+        console.log('length: ',persons.filter(p => p.name === person.name).length)
+        if (persons.filter(p => p.name === person.name).length === 0) {
+            persons=persons.concat(person)
+            response.json(person)
+        }else{
+            response.status(400).json({error: 'name already exists'})
+        }
+    }else{
+        response.status(400).json({error: 'name or number missing'})
+    }
   })
 
 const PORT = 3001
