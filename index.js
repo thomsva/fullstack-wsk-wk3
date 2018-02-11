@@ -25,28 +25,28 @@ app.use(morgan(':method :url :data :status :res[content-length] - :response-time
 
 app.use(bodyParser.json())
 
-let persons = [
-    {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
-      "name": "Martti Tienari",
-      "number": "040-123456",
-      "id": 2
-    },
-    {
-      "name": "Arto Järvinen",
-      "number": "040-123456",
-      "id": 3
-    },
-    {
-      "name": "Lea Kutvonen",
-      "number": "040-123456",
-      "id": 4
-    }
-  ]
+// let persons = [
+//     {
+//       "name": "Arto Hellas",
+//       "number": "040-123456",
+//       "id": 1
+//     },
+//     {
+//       "name": "Martti Tienari",
+//       "number": "040-123456",
+//       "id": 2
+//     },
+//     {
+//       "name": "Arto Järvinen",
+//       "number": "040-123456",
+//       "id": 3
+//     },
+//     {
+//       "name": "Lea Kutvonen",
+//       "number": "040-123456",
+//       "id": 4
+//     }
+//   ]
 
 app.get('/info', (req, res) => {
     const now = new Date();
@@ -92,17 +92,6 @@ app.delete('/api/persons/:id', (request, response) => {
         })
 })
 
-
-app.delete('/api/notes/:id', (request, response) => {
-    Note
-      .findByIdAndRemove(request.params.id)
-      .then(result => {
-        response.status(204).end()
-      })
-      .catch(error => {
-        response.status(400).send({ error: 'malformatted id' })
-      })
-  })
 
 app.post('/api/persons', (request, response) => {
     const body = request.body
