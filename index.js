@@ -2,6 +2,9 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 var morgan = require('morgan')
+const cors = require('cors')
+
+app.use(cors())
 
 morgan.token('data', function getData (req) {
     return JSON.stringify(req.body)
@@ -43,7 +46,6 @@ app.get('/info', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
-
     res.json(persons)
 })
 
