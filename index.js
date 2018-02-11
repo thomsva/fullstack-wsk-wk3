@@ -3,6 +3,16 @@ const app = express()
 const bodyParser = require('body-parser')
 var morgan = require('morgan')
 const cors = require('cors')
+const Person = require('./models/person')
+const mongoose = require('mongoose')
+
+const formatPerson = (person) => {
+    return {
+      name: person.name,
+      number: person.number,
+      id: person._id
+    }
+  }
 
 app.use(express.static('build'))
 app.use(cors())
@@ -46,9 +56,13 @@ app.get('/info', (req, res) => {
   
 })
 
-app.get('/api/persons', (req, res) => {
-    res.json(persons)
-})
+app.get('/api/persons', (request, response) => {
+    Person
+      .find({})
+      .then(persons => {
+        response.json(persons.map(formatPerson))
+      })
+  })
 
 app.get('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
