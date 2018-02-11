@@ -50,10 +50,14 @@ app.use(bodyParser.json())
 
 app.get('/info', (req, res) => {
     const now = new Date();
-    var response = '<p>Puhelinluettelossa ' + persons.length + ' henkilön tiedot.</p>'
-    var response = response+ now.toString()
-    res.send(response)
-  
+    Person
+      .find({})
+      .then(persons => {
+        var response = '<p>Puhelinluettelossa ' + persons.length + ' henkilön tiedot.</p>'
+        var response = response+ now.toString()
+        res.send(response)
+      })
+
 })
 
 app.get('/api/persons', (request, response) => {
