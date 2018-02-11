@@ -33,7 +33,6 @@ let persons = [
       "id": 4
     }
   ]
-  
 
 app.get('/info', (req, res) => {
     const now = new Date();
