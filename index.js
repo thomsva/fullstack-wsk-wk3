@@ -3,7 +3,12 @@ const app = express()
 const bodyParser = require('body-parser')
 var morgan = require('morgan')
 
-app.use(morgan('tiny'))
+morgan.token('data', function getData (req) {
+    return JSON.stringify(req.body)
+  })
+
+app.use(morgan(':method :url :data :status :res[content-length] - :response-time ms'))
+
 app.use(bodyParser.json())
 
 let persons = [
@@ -45,7 +50,6 @@ app.get('/api/persons', (req, res) => {
 
 app.get('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
-    console.log(id)
     const person = persons.find(person => person.id === id )
     if (person) {
         response.json(person)
@@ -63,9 +67,7 @@ app.delete('/api/persons/:id', (request, response) => {
 app.post('/api/persons', (request, response) => {
     const person = request.body
     person.id=Math.floor(1000000*Math.random())
-    console.log(person)
     if (person.name && person.number) {
-        console.log('length: ',persons.filter(p => p.name === person.name).length)
         if (persons.filter(p => p.name === person.name).length === 0) {
             persons=persons.concat(person)
             response.json(person)
