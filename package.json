@@ -1,0 +1,19 @@
+{
+  "name": "fullstack-wsk-wk3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomsva/fullstack-wsk-wk3.git"
+  },
+  "author": "Thomas Svartbäck",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thomsva/fullstack-wsk-wk3/issues"
+  },
+  "homepage": "https://github.com/thomsva/fullstack-wsk-wk3#readme"
+}
